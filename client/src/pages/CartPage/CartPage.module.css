@@ -1,0 +1,104 @@
+/* CartPage.module.css */
+
+/* Ảnh sản phẩm: Bo góc và fix kích thước chuẩn */
+.productImg {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Khối điều chỉnh số lượng (+ -) */
+.quantityGroup {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    width: fit-content;
+    overflow: hidden;
+}
+
+.qtyBtn {
+    background: #fff;
+    border: none;
+    padding: 5px 12px;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color: #555;
+}
+
+.qtyBtn:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.qtyInput {
+    width: 40px;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+/* Nút xóa (thùng rác) */
+.deleteBtn {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.deleteBtn:hover {
+    color: #dc3545; /* Màu đỏ khi hover */
+    transform: scale(1.1);
+}
+
+/* Phần tổng kết đơn hàng bên phải (Sticky) */
+.summaryCard {
+    position: sticky;
+    top: 20px; /* Dính lên trên khi cuộn */
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #dee2e6;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #dc3545;
+}
+
+/* Hiệu ứng item trong giỏ hàng */
+.cartItem {
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+ 
+}
+
+.cartItem:hover{
+
+    background-color: rgba(0,0,0,0.5);
+
+}
+.cartItem:last-child {
+    border-bottom: none;
+}

@@ -1,0 +1,168 @@
+.searchResult {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.searchItem {
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.searchItem img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.searchItem:hover {
+  background: #f5f5f5;
+}
+
+
+.marqueeText {
+  font-size: 20px;
+  white-space: nowrap;
+  animation: moveText 8s linear infinite alternate;
+}
+
+@keyframes moveText {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw - 100%));
+  }
+}
+.categories {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.categories li {
+  display: inline-block;
+  position: relative;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Gạch đỏ mặc định (ẩn) */
+.categories li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: red;
+  transition: width 0.3s ease;
+}
+
+/* Hover thì hiện */
+.categories li:hover::after {
+  width: 100%;
+}
+.active::after {
+  width: 100%;
+}
+
+/* ✅ ACTIVE thì LUÔN hiện */
+.categories li.active::after {
+  width: 100%;
+}
+
+.imgCategory{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+
+}
+.filter{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+}
+.productList{
+    width: 80%;
+
+
+}
+
+/* Card tổng */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Ảnh */
+.imageWrap {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.imageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.08);
+}
+
+/* Body */
+.cardBody {
+  padding: 16px;
+  text-align: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* Button */
+.button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #dc3545;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.button:hover {
+  background: #bb2d3b;
+  transform: scale(1.05);
+}

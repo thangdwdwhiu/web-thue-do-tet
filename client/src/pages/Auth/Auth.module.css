@@ -1,0 +1,54 @@
+/* src/components/Auth/Auth.module.css */
+
+.authContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.authCard {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 450px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.toggleText {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    color: #666;
+}
+
+.toggleBtn {
+    background: none;
+    border: none;
+    color: #764ba2;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0 5px;
+}
+
+.toggleBtn:hover {
+    color: #5a367e;
+}
+
+/* Animation đơn giản */
+:global(.fade-in) {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
