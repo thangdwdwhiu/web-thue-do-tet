@@ -110,7 +110,7 @@ export default function Home() {
       products={getListProducts.list} 
       filterBySearch={filterBySearch} 
       isLogin={isLogin} 
-      avatar={user.avatar}
+      user={user}
       handleLogout={handleLogout}/>
       <HeroBanner styles={styles} />
      

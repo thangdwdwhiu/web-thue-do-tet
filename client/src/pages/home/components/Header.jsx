@@ -6,7 +6,7 @@ import LiXiRain from '../../../components/LiXiRain';
 
 
 
-export default memo ( function Header({ styles, products, filterBySearch, isLogin, avatar , handleLogout}) {
+export default memo ( function Header({ styles, products, filterBySearch, isLogin, user , handleLogout}) {
   const navigate = useNavigate();
 
   const [showLiXi, setShowLiXi] = useState(true);
@@ -114,14 +114,18 @@ isLogin ? (        <div className="d-flex gap-2 position-relative">
             <div>
               <button onClick={() => setShowMenuAccount(true)} className='btn'>
             <img style={{width: "50px", height: "50px"}} 
-            className='img-fluid rounded-circle shadow ' src={getImageUrl(avatar) ?? null} alt="" /></button>
+            className='img-fluid rounded-circle shadow ' src={getImageUrl(user?.avatar) ?? null} alt="" /></button>
             </div>
 
           {
             showMenuAccount && (
                  <div ref={menuRef} style={{zIndex: "2000"}} className='card position-absolute top-100 end-0'>
               <div className="card-body">
+                {
+                  user.role === "admin" && (<button onClick={() => navigate("/admin/dashboard")} className='btn'><i className="bi bi-kanban"></i> dashboard</button>)
+                }
                 <button onClick={handleLogout} className='btn'><i className="bi bi-box-arrow-left"></i> Đăng xuất</button>
+                
               </div>
             </div>
             )

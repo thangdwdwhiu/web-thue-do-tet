@@ -37,7 +37,8 @@ class AuthController {
         mat_khau: hashedPassword, // Lưu mật khẩu đã mã hóa
         ho_ten: ho_ten,
         so_dien_thoai: so_dien_thoai,
-        avatar: "/images/avatar/1.png" 
+        avatar: "/images/avatar/1.png" ,
+        role: "user"
       });
 
       // 4. Trả về kết quả (Không trả về mật khẩu)
