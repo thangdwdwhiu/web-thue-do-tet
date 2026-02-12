@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
 static associate(models) {
   DanhMuc.hasMany(models.SanPham, {
     foreignKey: 'danh_muc_id',
-    as: 'sanPham'
+    as: 'sanPham',
+    onDelete: "CASCADE"
   });
 }
 
@@ -23,6 +24,7 @@ static associate(models) {
     sequelize,
     modelName: 'DanhMuc',
     tableName: "DanhMucs",
+    
  
   });
   return DanhMuc;

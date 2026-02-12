@@ -62,8 +62,10 @@ class AuthController {
     try {
       const payload =  req.body;
 
-      const { ten_tai_khoan, mat_khau } = payload;
+      let { ten_tai_khoan, mat_khau } = payload;
 
+      ten_tai_khoan = String(ten_tai_khoan);
+      mat_khau = String(mat_khau);
       // 1. Tìm user trong DB
       const user = await NguoiDung.findOne({
         where: { ten_tai_khoan: ten_tai_khoan }

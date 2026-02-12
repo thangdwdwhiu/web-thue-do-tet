@@ -11,5 +11,4 @@ cartRoute.post("/", authMiddleware, addToCartValidator, validationErrorHandler, 
 cartRoute.put("/:id", authMiddleware, changeQuantityValidator, validationErrorHandler, cartController.changeQuantityCartItem);
 cartRoute.delete("/:id", authMiddleware, cartController.deleteCartItem);
 
-
 module.exports = cartRoute;

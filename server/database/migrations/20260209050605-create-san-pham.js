@@ -35,7 +35,8 @@ module.exports = {
         references: {
           model: "DanhMucs",
           key: "id"
-        }
+        },
+        onDelete: "CASCADE"
       },
       slug: {
         allowNull: false,
