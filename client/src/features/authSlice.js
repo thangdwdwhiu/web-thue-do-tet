@@ -37,6 +37,26 @@ const initialState = {
     }
 }
 
+// logout
+export const logout = createAsyncThunk("auth/logout", async (_, thunk) => {
+
+    try {
+        const data = await apiFetch("/auth", {
+            method: "DELETE" ,
+            headers: {"Content-Type" : "application/json"},
+            credentials: "include"
+        });
+
+        return data.message;
+
+    }
+    catch (err) {
+            console.log(err);
+            return thunk.rejectWithValue({error : err.message} )
+            
+        
+    }
+})
 export const register = createAsyncThunk("auth/register", async(payload,thunk) => {
     try {
         const res = await fetch(`${baseUrl}/auth/register`, {
@@ -141,6 +161,12 @@ const authSlice = createSlice({
             state.auth.error = action.payload.error;
             state.auth.isLogin = false;
         })
+        //logout
+        .addCase(logout.fulfilled, state => state.user.user = null)
+        .addCase(logout.rejected, (state, action) => {
+            state.user.user = null;
+            state.auth.error = action.payload.error || "có lỗi khi đăng xuất";
+        } )
     }
 
 })

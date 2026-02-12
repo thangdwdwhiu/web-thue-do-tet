@@ -6,7 +6,7 @@ const { UUID } = require("sequelize");
 
 // Helper tạo Token (Access Token)
 
-
+const isProduction = process.env.NODE_ENV === "production"
 class AuthController {
   
   // 1. ĐĂNG KÝ (Register)
@@ -84,7 +84,7 @@ class AuthController {
       const token = generateAccessToken(user);
 
  
-      const isProduction = process.env.NODE_ENV === "production"
+      
       res.cookie("token", token, {
         httpOnly: true,
         secure: isProduction, 
@@ -161,6 +161,20 @@ class AuthController {
     } catch (err) {
       next(err);
     }
+  }
+
+  async logout (req, res, next) {
+      res.clearCookie("token", {
+                httpOnly: true,
+        secure: isProduction, 
+        sameSite: isProduction ? "none" : "lax",
+   
+
+      });
+      res.status(401).json({
+        success: true,
+        error: "Đăng xuất thành công"
+      })
   }
 }
 

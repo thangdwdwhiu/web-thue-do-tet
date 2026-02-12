@@ -6,8 +6,10 @@ const { registerValidator, loginValidator } = require("../validator/auth.validat
 
 const authRoute = express.Router();
 
+authRoute.delete("/", AuthController.logout);
 authRoute.post("/register", registerValidator, validationErrorHandler, AuthController.register)
 authRoute.post("/login", loginValidator, validationErrorHandler, AuthController.login)
-authRoute.get("/me", authMiddleware, AuthController.me)
+authRoute.get("/me", authMiddleware, AuthController.me);
+
 
 module.exports = authRoute;

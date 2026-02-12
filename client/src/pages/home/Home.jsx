@@ -13,27 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllDanhMuc } from "../../features/categoriesSlice";
 import { getAllsProduct } from "../../features/productsSlice";
 import Loading from "../../components/Loading";
-import { checkAuth } from "../../features/authSlice";
+import { checkAuth, logout } from "../../features/authSlice";
 
 export default function Home() {
   const imgs = { aoTruyenThong, children, vest };
   const dispatch = useDispatch();
 
-  // 1. Lấy dữ liệu Category từ Redux
+ 
   const { list: categoryList, getList: getListCategories } = useSelector((state) => state.categories);
 
-  // 2. Lấy dữ liệu Product từ Redux
-  // Lưu ý: Đổi tên biến list thành getListProducts.list để tránh trùng tên và dễ hiểu
+
   const { getList: getListProducts } = useSelector((state) => state.products);
-  const {isLogin} = useSelector((state) => state.auth.auth)
+  const {isLogin, error} = useSelector((state) => state.auth.auth)
   const {user} = useSelector((state) => state.auth.user)
   console.log(user);
-  
-  // 3. State để hiển thị sản phẩm (đã được lọc hoặc sắp xếp)
-  // Khởi tạo là mảng rỗng
+
   const [products, setProducts] = useState([]);
 
-  // Gọi API khi mount
   useEffect(() => {
     dispatch(getAllDanhMuc());
     dispatch(getAllsProduct());
@@ -51,7 +47,7 @@ export default function Home() {
   setProducts(newProducts);
 }, []);
 
-  // Kiểm tra Loading/Error cho Category
+
   if (getListCategories.loading) {
     return <Loading title={"đang tải danh mục"} />;
   }
@@ -59,7 +55,7 @@ export default function Home() {
     return <div>Lỗi tải danh mục: {getListCategories.error}</div>;
   }
 
-  // Kiểm tra Loading/Error cho Product (Nên thêm vào để trải nghiệm tốt hơn)
+  
   if (getListProducts.loading) {
     return <Loading title={"đang tải sản phẩm"} />;
   }
@@ -101,12 +97,21 @@ export default function Home() {
         setProducts(originalList);
     }
   };
+  const handleLogout = async () => {
+      dispatch(logout());
+  }
 
 
 
   return (
     <>
-      <Header styles={styles} products={getListProducts.list} filterBySearch={filterBySearch} isLogin={isLogin} avatar={user.avatar}/>
+      <Header 
+      styles={styles} 
+      products={getListProducts.list} 
+      filterBySearch={filterBySearch} 
+      isLogin={isLogin} 
+      avatar={user.avatar}
+      handleLogout={handleLogout}/>
       <HeroBanner styles={styles} />
      
       <CategoryPanel styles={styles} imgs={imgs} categories={categoryList || []} handleFilerCategories={handleFilerCategories} />

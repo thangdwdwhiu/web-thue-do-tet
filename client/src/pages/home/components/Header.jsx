@@ -4,18 +4,17 @@ import { getImageUrl } from '../../../utils/image';
 import LiXiRain from '../../../components/LiXiRain';
 
 
-/* ===== Component mưa lì xì GIỮ NGUYÊN ===== */
 
 
-/* ===== HEADER ===== */
-export default memo ( function Header({ styles, products, filterBySearch, isLogin, avatar }) {
+export default memo ( function Header({ styles, products, filterBySearch, isLogin, avatar , handleLogout}) {
   const navigate = useNavigate();
 
   const [showLiXi, setShowLiXi] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [showSearchResult, setShowSearchResult] = useState(false);
   const searchRef = useRef(null);
-
+  const [showMenuAccount, setShowMenuAccount] = useState(false);
+  const menuRef = useRef(null)
   
 
   /* ===== LỌC SẢN PHẨM ===== */
@@ -30,6 +29,9 @@ export default memo ( function Header({ styles, products, filterBySearch, isLogi
     const handleClickOutside = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
         setShowSearchResult(false);
+      }
+      if(menuRef.current && !menuRef.current.contains(e.target)){
+        setShowMenuAccount(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -105,14 +107,25 @@ export default memo ( function Header({ styles, products, filterBySearch, isLogi
 
         {/* TOOLS */}
 {
-isLogin ? (        <div className="d-flex gap-2">
+isLogin ? (        <div className="d-flex gap-2 position-relative">
           <button onClick={() => navigate("/cart")} className="btn">
             giỏ hàng <i className="bi bi-cart"></i>
           </button>
             <div>
-              <button onClick={() => navigate("/auth")} className='btn'>
+              <button onClick={() => setShowMenuAccount(true)} className='btn'>
             <img style={{width: "50px", height: "50px"}} 
-            className='img-fluid rounded-circle shadow' src={getImageUrl(avatar) ?? null} alt="" /></button></div>
+            className='img-fluid rounded-circle shadow ' src={getImageUrl(avatar) ?? null} alt="" /></button>
+            </div>
+
+          {
+            showMenuAccount && (
+                 <div ref={menuRef} style={{zIndex: "2000"}} className='card position-absolute top-100 end-0'>
+              <div className="card-body">
+                <button onClick={handleLogout} className='btn'><i className="bi bi-box-arrow-left"></i> Đăng xuất</button>
+              </div>
+            </div>
+            )
+          }
           
         </div>)
         : (

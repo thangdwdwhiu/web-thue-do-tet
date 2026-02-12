@@ -27,7 +27,9 @@ export async function apiFetch(
   const response = await fetch(BASE_URL + url, config);
 
 if (response.status === 401) {
+  window.location.href = "auth";
   throw createError(response.status, "Chưa đăng nhập", "UNAUTHORIZED");
+  
 }
 
 
