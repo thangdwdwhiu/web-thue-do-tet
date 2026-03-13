@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { apiFetch } from "../services/apiFetch";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -13,6 +14,11 @@ const initialState = {
         loading: true,
         error: null
     },
+    create: {
+        loading: false,
+        error: null,
+        success: false
+    }
 
 }
 
@@ -64,7 +70,24 @@ export const getProductDetails = createAsyncThunk("product/detail", async (slug,
         
     }
 })
+export const createProduct = createAsyncThunk("product/create", async (payload, thunk) => {
+    try {
+        const data = await apiFetch("/products", {
+            method: "POST",
+            body: payload,
+            credentials: "include"
+        });
 
+        return data;
+        
+
+    }
+    catch (err) {
+        console.log(err);
+        return thunk.rejectWithValue({error: err.message})
+        
+    }
+})
 const productSlice = createSlice({
 
     name: "product",
@@ -99,6 +122,31 @@ const productSlice = createSlice({
             state.getProductDetails.error = action.payload.error;
             state.getProductDetails.productDetails = {};
         })
+
+        // Create product
+        .addCase(createProduct.pending, (state) => {
+            state.create.loading = true;
+            state.create.error = null;
+            state.create.success = false;
+        })
+        .addCase(createProduct.fulfilled, (state, action) => {
+            state.create.loading = false;
+            state.create.error = null;
+            state.create.success = true;
+
+            // server returns { success: true, product }
+            const created = action.payload && action.payload.product ? action.payload.product : null;
+            if (created) {
+                // add to list front
+                state.getList.list.unshift(created);
+            }
+        })
+        .addCase(createProduct.rejected, (state, action) => {
+            state.create.loading = false;
+            state.create.success = false;
+            state.create.error = action.payload ? action.payload.error : (action.error && action.error.message) || "Tạo thất bại";
+        })
+        
 
 
 

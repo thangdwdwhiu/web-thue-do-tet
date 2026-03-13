@@ -92,7 +92,7 @@ export default memo ( function  ProductSale({ styles, sale, handlePaymentPreview
     // payment 
 
     const handleCreateSession = () => {
-        if (!sizeSelected) {
+        if (sale.sizes && sale.sizes.length > 1 && !sizeSelected) {
             toast.error("vui lòng chọn size");
             return;
         }

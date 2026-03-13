@@ -133,6 +133,10 @@
     gap: 10px;
     align-items: center;
 }
+.productCard:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
 .productImg {
     width: 64px;
     height: 64px;

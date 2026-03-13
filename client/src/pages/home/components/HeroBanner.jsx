@@ -16,7 +16,7 @@ export default function HeroBanner({styles}) {
             }}>
                 <strong className={styles.marqueeText} style={{ fontSize: "20px",
                     textShadow: "0 2px black"
-                 }}>Chào mừng tết nguyên đán 2026 🌸</strong>
+                 }}>Chào mừng quý khách đến với web lỏ 🌸</strong>
             </div>
         </>
     )
